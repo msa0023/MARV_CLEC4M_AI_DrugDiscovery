@@ -1,8 +1,8 @@
 import pandas as pd
 from rdkit import Chem
 
-INPUT  = "data/input.csv"
-OUTPUT = "data/cleaned_data.csv"
+INPUT  = "input.csv"
+OUTPUT = "output.csv"
 
 df = pd.read_csv(INPUT)
 print(f"Loaded: {len(df)} compounds")
