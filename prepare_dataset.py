@@ -3,9 +3,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from imblearn.over_sampling import SMOTE
 
-INPUT     = "data/data_with_descriptors.csv"
-OUT_TRAIN = "data/train_data.csv"
-OUT_TEST  = "data/test_data.csv"
+INPUT     = "input.csv"
+OUT_TRAIN = "train.csv"
+OUT_TEST  = "test.csv"
 
 DESCRIPTOR_COLS = [
     "MolWt", "MolLogP", "MaxPartialCharge", "MinPartialCharge",
