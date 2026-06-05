@@ -2,8 +2,8 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Lipinski
 
-INPUT  = "results/active_compounds.csv"
-OUTPUT = "results/drug_like_compounds.csv"
+INPUT  = "input.csv"
+OUTPUT = "output.csv"
 
 def get_properties(smiles):
     mol = Chem.MolFromSmiles(smiles)
