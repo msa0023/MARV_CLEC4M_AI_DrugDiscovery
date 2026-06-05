@@ -5,10 +5,10 @@ import joblib
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-IN_TRAIN  = "data/train_data.csv"
-IN_TEST   = "data/test_data.csv"
-OUT_TRAIN = "data/train_pca.csv"
-OUT_TEST  = "data/test_pca.csv"
+IN_TRAIN  = "train_data.csv"
+IN_TEST   = "test_data.csv"
+OUT_TRAIN = "train_pca.csv"
+OUT_TEST  = "test_pca.csv"
 os.makedirs("results", exist_ok=True)
 
 DESCRIPTOR_COLS = [
@@ -48,6 +48,6 @@ pd.DataFrame(X_train_pca, columns=["PC1","PC2"]).assign(
 pd.DataFrame(X_test_pca, columns=["PC1","PC2"]).assign(
     Label=test["Label"].values).to_csv(OUT_TEST, index=False)
 
-joblib.dump(scaler, "results/scaler.pkl")
-joblib.dump(pca,    "results/pca.pkl")
-print("PCA complete. Scaler and PCA model saved to results/")
+joblib.dump(scaler, "scaler.pkl")
+joblib.dump(pca,    "pca.pkl")
+print("PCA complete.")
