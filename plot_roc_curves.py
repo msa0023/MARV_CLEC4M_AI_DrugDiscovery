@@ -12,8 +12,8 @@ os.makedirs("results", exist_ok=True)
 MODEL_NAMES = ["kNN", "SVM", "RF", "NB", "GB"]
 COLORS      = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd"]
 
-train = pd.read_csv("data/train_pca.csv")
-test  = pd.read_csv("data/test_pca.csv")
+train = pd.read_csv("train.csv")
+test  = pd.read_csv("test.csv")
 X_train, y_train = train[["PC1","PC2"]].values, train["Label"].values
 X_test,  y_test  = test[["PC1","PC2"]].values,  test["Label"].values
 
@@ -26,7 +26,7 @@ for ax, (X, y, title, use_cv) in zip(axes, [
     (X_test,  y_test,  "Test Set",                  False),
 ]):
     for name, color in zip(MODEL_NAMES, COLORS):
-        model = joblib.load(f"results/models/{name}_model.pkl")
+        model = joblib.load(f"{name}_model.pkl")
         if use_cv:
             probs = cross_val_predict(model, X, y, cv=cv, method="predict_proba")[:,1]
         else:
@@ -42,7 +42,7 @@ for ax, (X, y, title, use_cv) in zip(axes, [
     ax.legend(fontsize=9, loc="lower right")
 
 plt.tight_layout()
-plt.savefig("results/roc_curves.svg")
-plt.savefig("results/roc_curves.tiff", dpi=600)
+plt.savefig("roc.svg")
+plt.savefig("roc.tiff", dpi=600)
 plt.close()
-print("Saved: results/roc_curves.tiff")
+print("Saved: roc.tiff")
