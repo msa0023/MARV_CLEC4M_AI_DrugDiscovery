@@ -47,7 +47,7 @@ def compute_descriptors(smiles):
     except:
         return [np.nan] * len(DESCRIPTOR_COLS)
 
-train  = pd.read_csv("data/train_pca.csv")
+train  = pd.read_csv("train_data_pca.csv")
 X_tr   = train[["PC1","PC2"]].values
 n, p   = X_tr.shape
 h_star = 3 * (p + 1) / n
@@ -58,9 +58,9 @@ centroid = X_tr.mean(axis=0)
 cov_inv  = np.linalg.pinv(np.cov(X_tr.T))
 sd_train = np.array([np.sqrt((x-centroid) @ cov_inv @ (x-centroid)) for x in X_tr])
 
-scaler = joblib.load("results/scaler.pkl")
-pca    = joblib.load("results/pca.pkl")
-df_new = pd.read_csv("data/new_dataset.csv")
+scaler = joblib.load("scaler.pkl")
+pca    = joblib.load("pca.pkl")
+df_new = pd.read_csv("new_external_dataset.csv")
 smiles = df_new["Smiles"].dropna().tolist()
 print(f"Computing descriptors for {len(smiles)} compounds...")
 
@@ -93,8 +93,8 @@ ax.text(0.98, 0.98,
         transform=ax.transAxes, fontsize=10, va="top", ha="right",
         bbox=dict(boxstyle="round", facecolor="white", alpha=0.8))
 plt.tight_layout()
-plt.savefig("results/AD_williams.svg")
-plt.savefig("results/AD_williams.tiff", dpi=600)
+plt.savefig("AD_williams.svg")
+plt.savefig("AD_williams.tiff", dpi=600)
 plt.close()
 
 pd.DataFrame([{
@@ -104,4 +104,4 @@ pd.DataFrame([{
 }]).to_csv("results/AD_summary.csv", index=False)
 
 print(f"AD complete: {in_ad}/{len(h_q)} ({100*in_ad/len(h_q):.1f}%) within AD")
-print("Saved: results/AD_williams.tiff, results/AD_summary.csv")
+print("Saved:AD_williams.tiff, AD_summary.csv")
