@@ -14,8 +14,8 @@ from sklearn.metrics import (accuracy_score, recall_score, f1_score,
 
 os.makedirs("results/models", exist_ok=True)
 
-train = pd.read_csv("data/train_pca.csv")
-test  = pd.read_csv("data/test_pca.csv")
+train = pd.read_csv("train.csv")
+test  = pd.read_csv("test.csv")
 X_train, y_train = train[["PC1","PC2"]].values, train["Label"].values
 X_test,  y_test  = test[["PC1","PC2"]].values,  test["Label"].values
 
@@ -73,10 +73,10 @@ for name, model in MODELS.items():
     te = metrics(y_test, y_te_pred, y_te_prob); te["Model"] = name
     test_rows.append(te)
 
-    joblib.dump(best, f"results/models/{name}_model.pkl")
+    joblib.dump(best, f"{name}_model.pkl")
     print(f"{name} -> Test AUC={te['AUC']}  MCC={te['MCC']}  Acc={te['Accuracy']}")
 
 cols = ["Model","Accuracy","Sensitivity","Specificity","F1","MCC","AUC"]
-pd.DataFrame(train_rows)[cols].to_csv("results/metrics_train.csv", index=False)
-pd.DataFrame(test_rows)[cols].to_csv("results/metrics_test.csv",  index=False)
-print("\nAll models saved to results/models/")
+pd.DataFrame(train_rows)[cols].to_csv("train.csv", index=False)
+pd.DataFrame(test_rows)[cols].to_csv("test.csv",  index=False)
+print("\nAll models saved.")
