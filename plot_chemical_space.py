@@ -10,7 +10,7 @@ PALETTE = {0: "steelblue", 1: "forestgreen"}
 LABELS  = {0: "Inactive (Decoy)", 1: "Active"}
 
 for split in ["train", "test"]:
-    df = pd.read_csv(f"data/{split}_data.csv")
+    df = pd.read_csv(f"{split}_data.csv")
 
     fig, ax = plt.subplots(figsize=(7, 5))
     for label, grp in df.groupby("Label"):
@@ -24,7 +24,7 @@ for split in ["train", "test"]:
     ax.legend(title="Class", fontsize=10)
     ax.grid(False)
     plt.tight_layout()
-    plt.savefig(f"results/chemical_space_{split}.svg")
-    plt.savefig(f"results/chemical_space_{split}.tiff", dpi=600)
+    plt.savefig(f"{split}.svg")
+    plt.savefig(f"{split}.tiff", dpi=600)
     plt.close()
-    print(f"Saved: results/chemical_space_{split}.tiff")
+    print(f"Saved: Chemical_space_{split}.tiff")
