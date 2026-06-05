@@ -5,8 +5,8 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors, AllChem, GraphDescriptors, EState, QED
 from sklearn.impute import SimpleImputer
 
-INPUT  = "data/new_dataset.csv"
-OUTPUT = "results/active_compounds.csv"
+INPUT  = "input.csv"
+OUTPUT = "output.csv"
 
 DESCRIPTOR_COLS = [
     "MolWt", "MolLogP", "MaxPartialCharge", "MinPartialCharge",
@@ -52,9 +52,9 @@ desc    = np.array([compute_descriptors(s) for s in smiles])
 imputer = SimpleImputer(strategy="mean")
 desc    = imputer.fit_transform(desc)
 
-scaler = joblib.load("results/scaler.pkl")
-pca    = joblib.load("results/pca.pkl")
-model  = joblib.load("results/models/RF_model.pkl")
+scaler = joblib.load("scaler.pkl")
+pca    = joblib.load("pca.pkl")
+model  = joblib.load("RF_model.pkl")
 
 X_pca       = pca.transform(scaler.transform(desc))
 predictions = model.predict(X_pca)
