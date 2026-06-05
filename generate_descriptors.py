@@ -3,8 +3,8 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Descriptors, AllChem, GraphDescriptors, EState, QED
 
-INPUT  = "data/cleaned_data.csv"
-OUTPUT = "data/data_with_descriptors.csv"
+INPUT  = "input.csv"
+OUTPUT = "output.csv"
 
 DESCRIPTOR_NAMES = [
     "MolWt", "MolLogP", "MaxPartialCharge", "MinPartialCharge",
